@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: booking_user
+      POSTGRES_PASSWORD: "1234567"
+      POSTGRES_DB: booking_db
+    volumes:
+      - booking_pgdata:/var/lib/postgresql/data
+
+volumes:
+  booking_pgdata:

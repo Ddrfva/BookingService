@@ -1,4 +1,9 @@
-﻿public class Booking
+﻿using Microsoft.EntityFrameworkCore;
+using BookingService.Domain;
+
+namespace BookingService.Domain;
+
+public class Booking
 {
     public int Id { get; set; }
 

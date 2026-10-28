@@ -1,12 +1,13 @@
-﻿public class Class1
-{
-	public Class1()
-	{
-        public enum RoomClass
+﻿using Microsoft.EntityFrameworkCore;
+using BookingService.Domain;
 
+namespace BookingService.Domain;
+
+public enum RoomClass
+{
         Standard,
         Premium,
         Luxury
-    }
 }
+
 

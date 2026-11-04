@@ -1,13 +1,11 @@
+using BookingService.Application.Services;
 using BookingService.Domain;
-using BookingService.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-
-builder.Services.AddScoped<ITimeService, TimeService>();
-
+builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

@@ -5,9 +5,9 @@ namespace BookingService.Domain;
 
 public enum RoomClass
 {
-        Standard,
-        Premium,
-        Luxury
+    Standard,
+    Premium,
+    Luxury
 }
 
 

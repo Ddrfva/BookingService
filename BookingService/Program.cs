@@ -13,6 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<IBookingService, BookingService.Application.Services.BookingService>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

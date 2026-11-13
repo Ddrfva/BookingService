@@ -1,5 +1,6 @@
 ﻿using BookingService.Application.Dtos;
 using BookingService.Domain;
+using BookingService.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookingService.Application.Services;

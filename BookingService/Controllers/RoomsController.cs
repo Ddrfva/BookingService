@@ -1,11 +1,12 @@
 ﻿using BookingService.Application.Dtos;
 using BookingService.Application.Services;
 using Microsoft.AspNetCore.Mvc;
+using BookingService.Domain;
 
 namespace BookingService.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/rooms")]
 public class RoomsController : ControllerBase
 {
     private readonly IRoomService _roomService;
@@ -13,17 +14,6 @@ public class RoomsController : ControllerBase
     public RoomsController(IRoomService roomService)
     {
         _roomService = roomService;
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Create(CreateRoomRequest request)
-    {
-        var room = await _roomService.CreateAsync(request);
-
-        return CreatedAtAction(
-            nameof(GetById),
-            new { id = room.Id },
-            room);
     }
 
     [HttpGet("{id:int}")]
@@ -36,7 +26,7 @@ public class RoomsController : ControllerBase
             return NotFound();
         }
 
-        return Ok(room);
+        return Ok(ToResponse(room));
     }
 
     [HttpGet]
@@ -44,20 +34,17 @@ public class RoomsController : ControllerBase
     {
         var rooms = await _roomService.GetAllAsync();
 
-        return Ok(rooms);
+        return Ok(rooms.Select(ToResponse));
     }
 
-    [HttpDelete("{id:int}")]
-    public async Task<IActionResult> Delete(int id)
+    private static RoomResponse ToResponse(Room room)
     {
-        var result = await _roomService.DeleteAsync(id);
-
-        return result switch
+        return new RoomResponse
         {
-            DeleteRoomResult.Deleted => NoContent(),
-            DeleteRoomResult.NotFound => NotFound(),
-            DeleteRoomResult.HasBookings => Conflict("У комнаты есть бронирования"),
-            _ => StatusCode(StatusCodes.Status500InternalServerError)
+            Id = room.Id,
+            Class = room.Class,
+            Price = room.Price,
+            Description = room.Description
         };
     }
 }

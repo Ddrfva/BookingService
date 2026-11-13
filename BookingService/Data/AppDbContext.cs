@@ -1,7 +1,7 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using BookingService.Domain;
 
-namespace BookingService.Domain;
+namespace BookingService.Data;
 
 public class AppDbContext : DbContext
 {

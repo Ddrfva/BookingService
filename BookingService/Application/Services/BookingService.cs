@@ -17,6 +17,12 @@ public class BookingService : IBookingService
         {
             return new CreateBookingResult { Status = CreateBookingStatus.InvalidDates };
         }
+
+        if (request.StartDate < DateOnly.FromDateTime(DateTime.Today))
+        {
+            return new CreateBookingResult { Status = CreateBookingStatus.InvalidDates };
+        }
+
         var room = await _db.Rooms.FirstOrDefaultAsync(r => r.Id  == request.RoomId);
        
         if(room is null)
